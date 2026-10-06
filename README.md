@@ -42,7 +42,7 @@ And across all of them:
 - **A detailed view** for each project, with its video, screenshots, folder tree, languages and
   facts.
 - **A star map** that draws the whole folder structure, with every project as a star.
-- **Six colour themes**, shared with [Nova Task](https://github.com/tuniveza/nova-task).
+- **Six colour themes**, shared with [Nova Calendar](https://github.com/tuniveza/nova-calendar).
 
 ## Screenshots
 
@@ -53,7 +53,7 @@ And across all of them:
 <table>
   <tr>
     <td width="50%"><img src="docs/media/decks.jpg" alt="Project decks with video posters, stats and language bars" width="100%"><br><sub>Project decks.</sub></td>
-    <td width="50%"><img src="docs/media/project-detail.jpg" alt="Nova Task's detail view with its video, goal, vision and features" width="100%"><br><sub>A project up close.</sub></td>
+    <td width="50%"><img src="docs/media/project-detail.jpg" alt="Nova Calendar's detail view with its video, goal, vision and features" width="100%"><br><sub>A project up close.</sub></td>
   </tr>
   <tr>
     <td colspan="2" align="center"><img src="docs/media/folder-tree.jpg" alt="The folder tree, languages and facts for a project" width="70%"><br><sub>Folder tree, languages and facts.</sub></td>
@@ -81,7 +81,7 @@ flowchart LR
 | `scan.mjs` | Measures each project on disk. Writes `data/projects.json` and `data/projects.js`. |
 | `capture.mjs` | Drives headless Chromium (Playwright) and ffmpeg. Writes into `media/<id>/`. |
 | `index.html`, `css/`, `js/observatory.js` | The page. |
-| `js/themes.js`, `js/cosmos.js`, `js/backdrop.js` | Shared with Nova Task: the colour themes, the generative space covers and the star backdrop. |
+| `js/themes.js`, `js/cosmos.js`, `js/backdrop.js` | Shared with Nova Calendar: the colour themes, the generative space covers and the star backdrop. |
 
 **What counts as what in a scan:**
 
@@ -129,12 +129,12 @@ To refresh it:
 npm run scan      # numbers only: sizes, lines, languages, git, folder trees
 npm run capture   # screenshots + demo videos (a couple of minutes)
 npm run build     # scan, capture, scan again
-node capture.mjs nova-task nova-bot   # re-capture just some projects
+node capture.mjs nova-calendar nova-bot   # re-capture just some projects
 ```
 
 Without a `projects.config.json`, both scripts fall back to the example catalogue and say so.
 The example assumes the Nova suite repos are cloned side by side (`../nova-bot`,
-`../nova-task` and so on); relative paths are resolved from the folder you run the scripts in.
+`../nova-calendar` and so on); relative paths are resolved from the folder you run the scripts in.
 
 **Needs:** Node 18 or newer. For capture, also `npm install` (Playwright is an optional
 dependency), a Chromium (the system one at `/usr/bin/chromium` is used if present, otherwise run
@@ -170,7 +170,7 @@ which is the quickest health check.
 index.html                    the page
 css/observatory.css           the styling
 js/observatory.js             decks, detail view, star map, search, filter and sort
-js/themes.js, cosmos.js, backdrop.js   shared with Nova Task
+js/themes.js, cosmos.js, backdrop.js   shared with Nova Calendar
 assets/sigil.svg              the Nova sigil
 scan.mjs                      measures every project
 capture.mjs                   screenshots and videos (Playwright + ffmpeg)
@@ -187,7 +187,7 @@ docs/media/                   README images
 | [nova-bot](https://github.com/tuniveza/nova-bot) | The website chat assistant, booking card and Nova Hub |
 | [nova-agent](https://github.com/tuniveza/nova-agent) | Browser helper that does jobs in Acuity's admin pages |
 | [nova-club](https://github.com/tuniveza/nova-club) | Members' Android app that shows the studio's busy times |
-| [nova-task](https://github.com/tuniveza/nova-task) | A cosmic calendar of note cards and day cards |
+| [nova-calendar](https://github.com/tuniveza/nova-calendar) | A cosmic calendar of note cards and day cards |
 | [nova-notes](https://github.com/tuniveza/nova-notes) | Nova Notes (in progress) |
 | **[nova-observatory](https://github.com/tuniveza/nova-observatory)** | This repo: a dashboard of every project, with screenshots and video |
 

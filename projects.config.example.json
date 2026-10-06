@@ -3,10 +3,10 @@
   "root": "..",
   "projects": [
     {
-      "id": "nova-task",
-      "name": "Nova Task",
+      "id": "nova-calendar",
+      "name": "Nova Calendar",
       "tagline": "A cosmic calendar of note cards and day cards",
-      "path": "../nova-task",
+      "path": "../nova-calendar",
       "category": "Nova suite",
       "theme": "pulsar",
       "kind": "Static web app",
@@ -31,7 +31,7 @@
       "capture": {
         "mode": "page",
         "file": "index.html",
-        "script": "novaTask"
+        "script": "novaCalendar"
       }
     },
     {

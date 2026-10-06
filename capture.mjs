@@ -166,7 +166,7 @@ const SCRIPTS = {
     await shot('Further down');
   },
 
-  async novaTask(page, shot) {
+  async novaCalendar(page, shot) {
     await shot('A month under the real moon');
     await page.click('[data-action="new-day"][data-preset="birthday"]');
     await sleep(500);
@@ -218,7 +218,7 @@ const SCRIPTS = {
     await slowScroll(page, 0.35);
     await sleep(800);
     await shot('Project decks');
-    const deck = page.locator('.deck[data-id="nova-task"]');
+    const deck = page.locator('.deck[data-id="nova-calendar"]');
     if (await deck.count()) {
       await deck.click();
       await sleep(1800);

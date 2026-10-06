@@ -36,8 +36,12 @@
         </span>
       </a>
       <div class="themes" id="themes" role="radiogroup" aria-label="Colour theme"></div>
-      <!-- Every Nova suite address, live and testing (behind the admin password) -->
-      <a href="https://novacane-worker.novacane-studio.workers.dev/admin/links" target="_blank" rel="noopener" title="Every Nova suite address, live and testing (password protected)" style="margin-left:12px;padding:6px 12px;border:1px solid currentColor;border-radius:999px;font-size:12px;letter-spacing:.08em;text-decoration:none;color:inherit;opacity:.85">🔒 All links</a>
+      <div class="hero-links">
+        <!-- Every Nova suite address, live and testing (behind the admin password) -->
+        <a href="https://novacane-worker.novacane-studio.workers.dev/admin/links" target="_blank" rel="noopener" title="Every Nova suite address, live and testing (password protected)" style="margin-left:12px;padding:6px 12px;border:1px solid currentColor;border-radius:999px;font-size:12px;letter-spacing:.08em;text-decoration:none;color:inherit;opacity:.85">🔒 All links</a>
+        <!-- Sound effects on or off (the shared Nova suite sounds, js/sfx.js); it plays its own chime when switched -->
+        <button type="button" class="sound-toggle" id="sound" aria-pressed="true" data-sfx="none" title="Sound effects">Sound</button>
+      </div>
     </div>
     <p class="hero-lede" id="lede">Every project in one sky.</p>
     <div class="stats" id="stats"></div>
@@ -83,6 +87,7 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="js/sfx.js"></script>
 <script src="data/projects.js"></script>
 <script src="js/themes.js"></script>
 <script src="js/cosmos.js"></script>

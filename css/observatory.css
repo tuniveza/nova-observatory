@@ -77,6 +77,18 @@ a { color: var(--hi); }
 .swatch:hover { transform: scale(1.1); }
 .swatch[aria-checked="true"] { box-shadow: 0 0 0 2px var(--void), 0 0 0 3.5px var(--sc), 0 0 14px var(--sc); }
 
+/* The links and the sound switch, side by side at the end of the header */
+.hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+/* Sound effects on/off: drawn like the "All links" pill next to it */
+.sound-toggle {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px;
+  background: none; font-size: 12px; letter-spacing: .08em; color: inherit; opacity: .85; cursor: pointer; transition: opacity .2s, color .2s;
+}
+.sound-toggle:hover { opacity: 1; }
+.sound-toggle svg { width: 15px; height: 15px; flex: none; }
+.sound-toggle[aria-pressed="true"] svg { color: var(--hi); }
+.sound-toggle[aria-pressed="false"] { color: var(--muted); }
+
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 22px; }
 .stat { padding: 14px 16px; border-radius: 18px; border: 1px solid var(--line); background: color-mix(in srgb, var(--void) 40%, transparent); min-width: 0; }
 .stat b { display: block; font-family: var(--f-display); font-stretch: 125%; font-weight: 900; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.05; color: #fff; overflow-wrap: anywhere; }

@@ -51,6 +51,10 @@
     link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg>'
   };
 
+  // A speaker with sound coming out, and the same speaker switched off (the sound effects button)
+  ICON.sound = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6.5 9H3.5v6h3l4.5 4z"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18.3 6.2a8.5 8.5 0 0 1 0 11.6"/></svg>';
+  ICON.muted = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6.5 9H3.5v6h3l4.5 4z"/><path d="m16 9.5 5 5M21 9.5l-5 5"/></svg>';
+
   const STATUS = { live: 'Live', active: 'Active', released: 'Released', skeleton: 'Skeleton', empty: 'Awaiting launch', building: 'Building' };
 
   // ---------- THEME (remembered per browser) ----------
@@ -71,6 +75,29 @@
     NO.backdrop.setTheme(theme);
     renderThemes();
     renderStarmap();
+  }
+
+  // ---------- SOUND ----------
+  // The soft Nova suite sounds on every press come from js/sfx.js (shared by every Nova app).
+  // This is just their on/off button in the header; the choice is remembered on this device.
+  const sfx = () => window.NovaSfx;
+  function renderSound() {
+    const b = $('#sound');
+    const on = Boolean(sfx() && sfx().enabled());
+    b.hidden = !sfx();
+    b.setAttribute('aria-pressed', String(on));
+    b.title = on ? 'Sound effects are on (click to switch them off)' : 'Sound effects are off (click to switch them on)';
+    b.innerHTML = `${on ? ICON.sound : ICON.muted}<span>Sound ${on ? 'on' : 'off'}</span>`;
+  }
+  function bindSound() {
+    renderSound();
+    $('#sound').addEventListener('click', () => {
+      if (!sfx()) return;
+      // A soft "off" chime while sounds are still on, so switching off is heard too (switching on plays its own)
+      if (sfx().enabled()) sfx().play('off');
+      sfx().toggle();
+    });
+    window.addEventListener('novasfxchange', renderSound);
   }
 
   // ---------- TOAST / COPY ----------
@@ -444,6 +471,7 @@
   NO.themes.apply(document.documentElement, theme);
   NO.backdrop.init(theme);
   renderThemes();
+  bindSound();
   if (!D || !Array.isArray(D.projects)) {
     $('#decks').innerHTML = '<div class="empty-data"><p>No scan data yet.</p><p>Run <code>npm run scan</code> in this folder (or <code>npm run build</code> for screenshots and video too), then reload.</p></div>';
     return;

@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="docs/media/overview.jpg" alt="Nova Observatory: totals for lines of code, size, files and languages above a grid of project decks" width="820">
-
 # Nova Observatory
 
 **Every project in one sky: a dashboard that measures your work on disk and shows it in screenshots and video.**
@@ -12,6 +10,10 @@
 [![ffmpeg](https://img.shields.io/badge/ffmpeg-video-007808?logo=ffmpeg&logoColor=white)](#capture)
 [![Nova suite](https://img.shields.io/badge/part%20of-nova--suite-B026FF)](https://github.com/tuniveza/nova-suite)
 
+<img src="docs/media/overview.jpg" alt="Nova Observatory's overview: totals for lines of code, size, files and languages, a language bar, the All links and Sound switches, and the first project decks" width="900">
+
+<sub>Always on inside Nova Agent at <code>/observatory/</code> · or open <code>index.html</code> anywhere</sub>
+
 </div>
 
 ---
@@ -21,7 +23,23 @@ disk rather than by hand: one script measures every project, another opens each 
 Chromium and records screenshots and a short demo video, and a static page shows the lot as
 project decks and a star map.
 
-The screenshots in this README come from a catalogue of just the Nova suite.
+The screenshots here come from the studio's own catalogue: the Nova suite, plus games, tools
+and experiments. They show project names, sizes and folder trees, and nothing personal.
+
+## What's new
+
+| | |
+|---|---|
+| 🔔 **Sound switch** | Soft cosmic sound effects on every press. The **Sound on / Sound off** switch beside All links turns them off and on. |
+| 🔒 **All links** | A pill in the header that opens the password-protected page with every Nova suite address, live and testing. |
+| ✦ **Served by Nova Agent** | Nova Agent serves it at `/observatory/`, so it's always on while Nova Agent is. |
+| 🧠 **Nova Index** | The suite's shared memory now has its own deck. Nova Portal may join it later. |
+
+## See it in action
+
+<p align="center"><img src="docs/media/demo.gif" width="720" alt="Scrolling down the overview through the project decks, then opening Nova Index's detail view"></p>
+
+<p align="center"><sub>Scroll the decks, then open one for the full story.</sub></p>
 
 ## What it does
 
@@ -31,34 +49,47 @@ Each project gets a **deck** showing:
 - its goal and vision, and what it does
 - its size on disk, project files, lines of code and languages
 - git state and last activity
-- screenshots and a demo video
+- screenshots and a demo video (or a generated cosmic cover)
 
 And across all of them:
 
-- **Totals**: lines of code, project files, size on disk, files, languages and last activity,
-  with a language bar.
-- **Search, filter and sort**: by name, goal, stack or path; by category; by recent activity
-  and more.
-- **A detailed view** for each project, with its video, screenshots, folder tree, languages and
-  facts.
-- **A star map** that draws the whole folder structure, with every project as a star.
-- **Six colour themes**, shared with [Nova Calendar](https://github.com/tuniveza/nova-calendar).
+| | |
+|---|---|
+| **Totals** | Lines of code, project files, size on disk, files, languages and last activity, with a language bar |
+| **Search, filter and sort** | By name, goal, stack or path; by category; by recent activity and more |
+| **A detailed view** | Each project's video, screenshots, folder tree, languages and facts |
+| **A star map** | The whole folder structure, with every project as a star sized by its lines of code |
+| **Six colour themes** | Shared with [Nova Calendar](https://github.com/tuniveza/nova-calendar) and [Nova Notes](https://github.com/tuniveza/nova-notes) |
+| **Sound effects** | The shared Nova suite sounds, with a switch in the header |
 
 ## Screenshots
 
-<p align="center">
-  <img src="docs/media/demo.gif" alt="Animated tour: the totals, scrolling through project decks, opening Nova Bot's detail view, and the star map" width="720">
-</p>
-
 <table>
   <tr>
-    <td width="50%"><img src="docs/media/decks.jpg" alt="Project decks with video posters, stats and language bars" width="100%"><br><sub>Project decks.</sub></td>
-    <td width="50%"><img src="docs/media/project-detail.jpg" alt="Nova Calendar's detail view with its video, goal, vision and features" width="100%"><br><sub>A project up close.</sub></td>
+    <td width="50%"><img src="docs/media/decks.jpg" alt="Project decks for Nova Observatory, Nova Agent and Nova Bot, with screenshots, stats and language bars" width="100%"><br><sub><b>Project decks.</b></sub></td>
+    <td width="50%"><img src="docs/media/project-detail.jpg" alt="Nova Calendar's detail view: its demo video, screenshots, folder tree, goal, vision and features" width="100%"><br><sub><b>A project up close.</b></sub></td>
   </tr>
   <tr>
-    <td colspan="2" align="center"><img src="docs/media/folder-tree.jpg" alt="The folder tree, languages and facts for a project" width="70%"><br><sub>Folder tree, languages and facts.</sub></td>
+    <td width="50%"><img src="docs/media/star-map.jpg" alt="The star map: every project as a star on the folder tree it grows from" width="100%"><br><sub><b>The star map.</b> Each star sits on its folder; bigger stars have more code.</sub></td>
+    <td width="50%"><img src="docs/media/nova-index.jpg" alt="The Nova Index deck beside Nova Calendar and Nova Notes" width="100%"><br><sub><b>Nova Index</b>, the newest deck in the Nova suite row.</sub></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/media/folder-tree.jpg" alt="Nova Calendar's folder tree, languages and facts: location, size, lines of code, last change and git" width="70%"><br><sub><b>Folder tree, languages and facts.</b></sub></td>
   </tr>
 </table>
+
+## Inside Nova Agent
+
+[Nova Agent](https://github.com/tuniveza/nova-agent) serves this folder at **`/observatory/`**
+(for example `http://localhost:4545/observatory/`) whenever it's running, so the Observatory is
+always on there with the latest scan. Nova Agent looks for it next to itself, in `../no`.
+
+## Sound effects
+
+Every press makes a soft cosmic sound, made live with the Web Audio API (no sound files) and kept
+quiet. The **Sound on / Sound off** switch beside **🔒 All links** turns them off and on, plays a
+little chime when it does, and is remembered on each device. The same `js/sfx.js` makes the
+sounds in Nova Notes and Nova Calendar.
 
 ## How it works
 
@@ -73,6 +104,7 @@ flowchart LR
     SCAN --> DATA[data/projects.js<br/>data/projects.json]
     DATA --> PAGE[index.html<br/>js/observatory.js]
     MEDIA --> PAGE
+    PAGE -.->|served at /observatory/| AGENT[Nova Agent]
 ```
 
 | File | Job |
@@ -82,6 +114,7 @@ flowchart LR
 | `capture.mjs` | Drives headless Chromium (Playwright) and ffmpeg. Writes into `media/<id>/`. |
 | `index.html`, `css/`, `js/observatory.js` | The page. |
 | `js/themes.js`, `js/cosmos.js`, `js/backdrop.js` | Shared with Nova Calendar: the colour themes, the generative space covers and the star backdrop. |
+| `js/sfx.js` | The Nova suite sound effects, shared with Nova Notes and Nova Calendar. |
 
 **What counts as what in a scan:**
 
@@ -96,12 +129,11 @@ flowchart LR
 
 **Capture modes** (`capture.mode` in the catalogue):
 
-- `page` opens the project in Chromium and plays a short scripted demo, recording the screen.
-  The project can be opened as a file, from a local static server (`serve`, with optional
-  `mounts`), from the project's own Vite (`vite: true`) or from a `url`. The demo scripts are in
-  `capture.mjs` under `SCRIPTS`.
-- `images` turns pictures already in the project into a Ken Burns slideshow video.
-- `none` shows a generated cosmic cover instead.
+| Mode | What it does |
+|---|---|
+| `page` | Opens the project in Chromium and plays a short scripted demo, recording the screen. The project can be opened as a file, from a local static server (`serve`, with optional `mounts`), from the project's own Vite (`vite: true`) or from a `url`. The demo scripts are in `capture.mjs` under `SCRIPTS`. |
+| `images` | Turns pictures already in the project into a Ken Burns slideshow video. |
+| `none` | Shows a generated cosmic cover instead. |
 
 **Safety:** during capture, every request that leaves the machine is blocked, except Google
 Fonts, and every non-GET request is blocked too. A demo can type into a chat widget, but nothing
@@ -169,8 +201,9 @@ which is the quickest health check.
 ```
 index.html                    the page
 css/observatory.css           the styling
-js/observatory.js             decks, detail view, star map, search, filter and sort
+js/observatory.js             decks, detail view, star map, search, filter, sort and the Sound switch
 js/themes.js, cosmos.js, backdrop.js   shared with Nova Calendar
+js/sfx.js                     the Nova suite sound effects
 assets/sigil.svg              the Nova sigil
 scan.mjs                      measures every project
 capture.mjs                   screenshots and videos (Playwright + ffmpeg)
@@ -185,12 +218,13 @@ docs/media/                   README images
 |---|---|
 | [nova-suite](https://github.com/tuniveza/nova-suite) | The Nova suite: an overview of every project |
 | [nova-bot](https://github.com/tuniveza/nova-bot) | The website chat assistant, booking card and Nova Hub |
-| [nova-agent](https://github.com/tuniveza/nova-agent) | Browser helper that does jobs in Acuity's admin pages |
+| [nova-agent](https://github.com/tuniveza/nova-agent) | The studio computer's helper; serves Nova Observatory at `/observatory/` |
 | [nova-club](https://github.com/tuniveza/nova-club) | Members' Android app that shows the studio's busy times |
 | [nova-calendar](https://github.com/tuniveza/nova-calendar) | A cosmic calendar of note cards and day cards |
-| [nova-notes](https://github.com/tuniveza/nova-notes) | Nova Notes (in progress) |
+| [nova-notes](https://github.com/tuniveza/nova-notes) | A note editor that writes from the centre outwards |
 | **[nova-observatory](https://github.com/tuniveza/nova-observatory)** | This repo: a dashboard of every project, with screenshots and video |
+| [nova-index](https://github.com/tuniveza/nova-index) | The suite's shared memory |
 
-## Licence
+---
 
-All rights reserved — Novacane Studios.
+<p align="center"><sub>Made for <b>Novacane Studios</b> · All rights reserved</sub></p>
